@@ -1,0 +1,21 @@
+{
+    "name": "form-clone",
+    "author": {
+        "name": "Mike Lehan",
+        "url": "https://github.com/M1ke"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "LICENSE"
+        }
+    ],
+    "dependencies": {
+        "jquery": "git@github.com:m1ke/jquery-bower.git",
+        "easy-js-jq": "git@github.com:m1ke/easy-js-jq.git"
+    },
+    "description": "Uses jQuery to quickly clone form elements",
+    "files": [
+        "form-clone.js"
+    ]
+}
