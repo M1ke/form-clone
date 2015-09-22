@@ -12,7 +12,7 @@
     ],
     "dependencies": {
         "jquery": "https://github.com/m1ke/jquery-bower.git",
-        "js-utils-jq": "https://github.com/m1ke/js-utils-jq.git"
+        "js-utils-jq": "https://github.com/m1ke/js-utils-jq.git#x1.0"
     },
     "description": "Uses jQuery to quickly clone form elements",
     "files": [

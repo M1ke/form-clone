@@ -1,4 +1,4 @@
-/*@include ../js-utils-jq/jq-input-blank.js */
+/*@include ../js-utils-jq/input-blank.js */
 
 var formClone = {
 	event: 'form-cloned'
