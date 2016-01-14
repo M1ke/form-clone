@@ -82,6 +82,9 @@ $.fn.formCloneRemove = function(buttonCss){
 		var $parent = $(this).parent()
 			,clones = $parent.find($(this).data('el')).length-1;
 		$(this).nextAll($(this).data('el')+':first').remove();
+		if (0==$(this).nextAll($(this).data('el')).length){
+			$(this).prevAll($(this).data('el')+':first').before($(this).siblings('.form-clone-add'));
+		}
 		$(this).remove();
 		if (clones<2){
 			$parent.find('.form-clone-remove').remove();
