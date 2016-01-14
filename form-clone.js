@@ -15,19 +15,20 @@ $.fn.formCloneQuantity = function(num, reduce){
 	}
 };
 
-$.fn.formClone = function(opts){
-	opts = $.extend({
-		all: this.data('clone-all') || true
-		,buttonCss: {'float': 'right', clear: 'right'}
-		,buttonText: '+'
-		,el: this.data('clone-el') || 'div'
-		,elCss: {overflow: 'hidden'}
-	}, opts);
-	if (opts.onClone){
-		this.bind('form-cloned', opts.onClone);
-	}
-	return this.each(function(opts){
+$.fn.formClone = function(options){
+
+	return this.each(function(options){
 		return function(key){
+			var opts = $.extend({
+				all: $(this).data('clone-all') || true
+				,buttonCss: {'float': 'right', clear: 'right'}
+				,buttonText: '+'
+				,el: $(this).data('clone-el') || 'div'
+				,elCss: {overflow: 'hidden'}
+			}, options);
+			if (opts.onClone){
+				$(this).bind('form-cloned', opts.onClone);
+			}
 			var $items = $(this).children(opts.el)
 				,length = $items.length;
 			$items.addClass('form-clone-el').each(function(opts){
@@ -68,7 +69,7 @@ $.fn.formClone = function(opts){
 				};
 			}(opts));
 		};
-	}(opts));
+	}(options));
 };
 
 $.fn.formCloneInit = function(opts){
