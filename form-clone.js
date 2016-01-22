@@ -63,7 +63,7 @@ $.fn.formClone = function(options){
 						}).css(opts.buttonCss).attr('title', 'Click to add another').insertBefore($(this));
 					}
 					if (length!=1){
-						$formCloneRemoveButton(opts.el, opts.buttonCss).insertAfter($(this));
+						$formCloneRemoveButton(opts.el, opts.buttonCss).insertBefore($(this));
 					}
 					$(this).css(opts.elCss);
 				};
