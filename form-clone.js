@@ -36,6 +36,9 @@ $.fn.formClone = function(options){
 					var $formCloneRemoveButton = function(el,buttonCss){
 						return $('<a href="#" class="form-clone-button form-clone-remove">-</a>').data('el', el).formCloneRemove(buttonCss);
 					};
+					if (length!=1){
+						$formCloneRemoveButton(opts.el, opts.buttonCss).insertBefore($(this));
+					}
 					if (key==(length-1)){
 						$('<a href="#" class="form-clone-button form-clone-add">'+opts.buttonText+'</a>').data(opts).click(function(e){
 							e.preventDefault();
@@ -61,9 +64,6 @@ $.fn.formClone = function(options){
 								$(this).data('cloneCallback').call(null, $cloned, $div);
 							}
 						}).css(opts.buttonCss).attr('title', 'Click to add another').insertBefore($(this));
-					}
-					if (length!=1){
-						$formCloneRemoveButton(opts.el, opts.buttonCss).insertBefore($(this));
 					}
 					$(this).css(opts.elCss);
 				};
