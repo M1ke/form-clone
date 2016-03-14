@@ -15,19 +15,20 @@ $.fn.formCloneQuantity = function(num, reduce){
 	}
 };
 
-$.fn.formClone = function(opts){
-	opts = $.extend({
-		all: this.data('clone-all') || true
-		,buttonCss: {'float': 'right', clear: 'right'}
-		,buttonText: '+'
-		,el: this.data('clone-el') || 'div'
-		,elCss: {overflow: 'hidden'}
-	}, opts);
-	if (opts.onClone){
-		this.bind('form-cloned', opts.onClone);
-	}
-	return this.each(function(opts){
+$.fn.formClone = function(options){
+
+	return this.each(function(options){
 		return function(key){
+			var opts = $.extend({
+				all: $(this).data('clone-all') || true
+				,buttonCss: {'float': 'right', clear: 'right'}
+				,buttonText: '+'
+				,el: $(this).data('clone-el') || 'div'
+				,elCss: {overflow: 'hidden'}
+			}, options);
+			if (opts.onClone){
+				$(this).bind('form-cloned', opts.onClone);
+			}
 			var $items = $(this).children(opts.el)
 				,length = $items.length;
 			$items.addClass('form-clone-el').each(function(opts){
@@ -35,6 +36,9 @@ $.fn.formClone = function(opts){
 					var $formCloneRemoveButton = function(el,buttonCss){
 						return $('<a href="#" class="form-clone-button form-clone-remove">-</a>').data('el', el).formCloneRemove(buttonCss);
 					};
+					if (length!=1){
+						$formCloneRemoveButton(opts.el, opts.buttonCss).insertBefore($(this));
+					}
 					if (key==(length-1)){
 						$('<a href="#" class="form-clone-button form-clone-add">'+opts.buttonText+'</a>').data(opts).click(function(e){
 							e.preventDefault();
@@ -65,14 +69,11 @@ $.fn.formClone = function(opts){
 							}
 						}).css(opts.buttonCss).attr('title', 'Click to add another').insertBefore($(this));
 					}
-					if (length!=1){
-						$formCloneRemoveButton(opts.el, opts.buttonCss).insertAfter($(this));
-					}
 					$(this).css(opts.elCss);
 				};
 			}(opts));
 		};
-	}(opts));
+	}(options));
 };
 
 $.fn.formCloneInit = function(opts){
@@ -85,6 +86,9 @@ $.fn.formCloneRemove = function(buttonCss){
 		var $parent = $(this).parent()
 			,clones = $parent.find($(this).data('el')).length-1;
 		$(this).nextAll($(this).data('el')+':first').remove();
+		if (0==$(this).nextAll($(this).data('el')).length){
+			$(this).prevAll($(this).data('el')+':first').before($(this).siblings('.form-clone-add'));
+		}
 		$(this).remove();
 		if (clones<2){
 			$parent.find('.form-clone-remove').remove();
