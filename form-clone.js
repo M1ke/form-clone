@@ -48,11 +48,15 @@ $.fn.formClone = function(opts){
 
 							$(this).insertAfter($div);
 
+							// Pass in "all" to copy events
 							$cloned = $div.clone($(this).data('all')).insertAfter($(this));
 
 							$formCloneRemoveButton(el, $(this).data('buttonCss')).insertBefore($(this));
 
-							$cloned.inputBlankArray().find('input:not([type="submit"])').val('');
+							// Set data.all-values to copy values
+							if (!$(this).data('all-values')){
+								$cloned.inputBlankArray().find('input:not([type="submit"])').val('');
+							}
 
 							$(this).parent().trigger(formClone.event);
 
