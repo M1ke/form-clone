@@ -58,7 +58,7 @@ $.fn.formClone = function(options){
 				$('<a href="#" class="form-clone-button form-clone-add">'+opts.buttonText+'</a>').data(opts).click(function(e){
 					e.preventDefault();
 					var el = $(this).data('el')
-						, $div = $(this).parent().find($(this).data('el')).last()
+						, $div = $(this).parent().children($(this).data('el')).last()
 						, $cloned;
 
 					if ($(this).prev('.form-clone-remove').length<1){
@@ -98,7 +98,7 @@ $.fn.formCloneRemove = function(buttonCss){
 	return this.css(buttonCss).attr('title', 'Click to remove this').click(function(e){
 		e.preventDefault();
 		var $parent = $(this).parent()
-			, clones = $parent.find($(this).data('el')).length-1;
+			, clones = $parent.children($(this).data('el')).length-1;
 
 		$(this).nextAll($(this).data('el')+':first').remove();
 		if (0===$(this).nextAll($(this).data('el')).length){
