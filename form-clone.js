@@ -76,7 +76,7 @@ $.fn.formCloneRemove=function(buttonCss){
 		$(this).prev().remove()
 		.end().remove();
 		if (clones<2){
-			$parent.find('.form-clone-remove').remove();
+			$parent.children('.form-clone-remove').remove();
 		}
 		$parent.trigger(formClone.event);
 	});
