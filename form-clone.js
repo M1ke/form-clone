@@ -44,9 +44,12 @@ $.fn.formClone=function(opts){
 							if ($(this).prev('.form-clone-remove').length<1){
 								$formCloneRemoveButton(el,$(this).data('buttonCss')).insertBefore($(this));
 							}
-							var $cloned=$div.clone($(this).data('all')).insertBefore($(this));
+							var $cloned=$div.clone($(this).data('all'));
+							$cloned.inputBlankArray().find('input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])').val('');
+							$cloned.find('input[type="radio"], input[type="checkbox"]').prop('checked', false);
+							// do insert after un-check any radios so we don't insert checked radios and so possibly unset another already in the page
+							$cloned.insertBefore($(this));
 							$formCloneRemoveButton(el,$(this).data('buttonCss')).insertBefore($(this));
-							$cloned.inputBlankArray().find('input:not([type="submit"])').val('');
 							$(this).parent().trigger(formClone.event);
 							if (typeof $(this).data('cloneCallback')=='function'){
 								$(this).data('cloneCallback').call(null,$cloned,$div);
