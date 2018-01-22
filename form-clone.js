@@ -68,14 +68,17 @@ $.fn.formClone = function(options){
 					$(this).insertAfter($div);
 
 					// Pass in "all" to copy events
-					$cloned = $div.clone($(this).data('all')).insertAfter($(this));
+					$cloned = $div.clone($(this).data('all'));
 
 					$formCloneRemoveButton(el, $(this).data('buttonCss')).insertBefore($(this));
 
 					// Set data.all-values to copy values
 					if (!$(this).data('all-values')){
-						$cloned.inputBlankArray().find('input:not([type="submit"])').val('');
+						$cloned.inputBlankArray().find('input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])').val('');
+						$cloned.find('input[type="radio"], input[type="checkbox"]').prop('checked', false);
 					}
+					// do insert after un-check any radios so we don't insert checked radios and so possibly unset another already in the page
+					$cloned.insertAfter($(this));
 
 					$(this).parent().trigger(formClone.event);
 
