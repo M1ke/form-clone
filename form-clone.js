@@ -74,7 +74,7 @@ $.fn.formClone = function(options){
 
 					// Set data.all-values to copy values
 					if (!$(this).data('all-values')){
-						$cloned.inputBlankArray().find('input:not([type="submit"]):not([type="radio"]):not([type="checkbox"])').val('');
+						$cloned.inputBlankArray().find('input').not('[type="submit"], [type="radio"], [type="checkbox"]').val('');
 						$cloned.find('input[type="radio"], input[type="checkbox"]').prop('checked', false);
 					}
 					// do insert after un-check any radios so we don't insert checked radios and so possibly unset another already in the page
